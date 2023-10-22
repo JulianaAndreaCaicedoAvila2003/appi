@@ -27,9 +27,11 @@ public class Sesion_entrenamiento {
         this.progreso = progreso;
     }
 // Enviar recordatorio
-    public void enviarRecordatorio() {
+    public void enviarRecordatorio(String mensaje) {
         if (!recordatorioEnviado) {
-            
+                Notificacion notificacion = new Notificacion( mensaje, "Sistema de Entrenamiento", usuario.getNombre());
+                usuario.recibirNotificacion(notificacion);
+
             recordatorioEnviado = true;
         }
     }

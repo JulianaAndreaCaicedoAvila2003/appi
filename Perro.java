@@ -28,4 +28,8 @@ public class Perro {
             System.out.println(sesion.toString());
         }
     }
+
+    public String getNombre() {
+        return null;
+    }
 }
