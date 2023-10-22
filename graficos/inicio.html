@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Inicio de Sesión</title>
+    <style>
+        /* Estilo para el fondo de la página */
+        body {
+            background-image: url('perro_ini.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta de tu imagen */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0;
+        }
+
+        /* Estilos CSS para dar formato al formulario */
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.); /* Fondo semi-transparente para el formulario */
+            padding: 20px;
+            border-radius: 5px;
+            margin-left: 11cm; 
+            border: none;
+            
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logo-container {
+            text-align: center; /* Centra horizontalmente */
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+        <img src="logo.png" alt="Logo de la empresa" style="width: 200px;">
+        <form method="post">
+            <input type="text" id="username" name="username" placeholder="Introducir nombre" required>
+            <input type="password" id="password" name="password" placeholder="password" required>
+            <input type="text" id="user_type" name="user_type" placeholder="Tipo de usuario" required >
+            <input type="submit" value="Iniciar Sesión">
+        </form>
+        
+    </div>
+</body>
+</html>
+
+
+
