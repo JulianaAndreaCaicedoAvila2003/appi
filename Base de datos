@@ -1,0 +1,198 @@
+CREATE TABLE Entrenador (
+    id serial PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    especialidad VARCHAR(100),
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    usuario VARCHAR(20) UNIQUE NOT NULL,
+    contrasena VARCHAR(64) NOT NULL, -- Se recomienda almacenar contraseñas con hash
+    fecha_registro DATE,
+    telefono VARCHAR(20)
+);
+
+-- Entrenador 1
+INSERT INTO Entrenador (nombre, especialidad, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Entrenador1', 'Obediencia', 'entrenador1@example.com', 'entrenador1user', 'hashed_password1', '2023-09-10', '123-456-7890');
+
+-- Entrenador 2
+INSERT INTO Entrenador (nombre, especialidad, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Entrenador2', 'Agilidad', 'entrenador2@example.com', 'entrenador2user', 'hashed_password2', '2023-09-11', '234-567-8901');
+
+-- Entrenador 3
+INSERT INTO Entrenador (nombre, especialidad, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Entrenador3', 'Saltos', 'entrenador3@example.com', 'entrenador3user', 'hashed_password3', '2023-09-12', '345-678-9012');
+
+-- Entrenador 4
+INSERT INTO Entrenador (nombre, especialidad, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Entrenador4', 'Rescate', 'entrenador4@example.com', 'entrenador4user', 'hashed_password4', '2023-09-13', '456-789-0123');
+
+-- Entrenador 5
+INSERT INTO Entrenador (nombre, especialidad, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Entrenador5', 'Conducta', 'entrenador5@example.com', 'entrenador5user', 'hashed_password5', '2023-09-14', '567-890-1234');
+
+SELECT * FROM Entrenador;
+
+
+CREATE TABLE Usuario (
+    id_usuario serial PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    usuario VARCHAR(20) UNIQUE NOT NULL,
+    contrasena VARCHAR(64) NOT NULL, 
+    fecha_registro DATE,
+    telefono VARCHAR(20)
+);
+
+-- Usuario 1
+INSERT INTO Usuario (nombre, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Usuario1', 'usuario1@example.com', 'usuario1user', 'hashed_password1', '2023-09-10', '123-456-7890');
+
+-- Usuario 2
+INSERT INTO Usuario (nombre, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Usuario2', 'usuario2@example.com', 'usuario2user', 'hashed_password2', '2023-09-11', '234-567-8901');
+
+-- Usuario 3
+INSERT INTO Usuario (nombre, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Usuario3', 'usuario3@example.com', 'usuario3user', 'hashed_password3', '2023-09-12', '345-678-9012');
+
+-- Usuario 4
+INSERT INTO Usuario (nombre, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Usuario4', 'usuario4@example.com', 'usuario4user', 'hashed_password4', '2023-09-13', '456-789-0123');
+
+-- Usuario 5
+INSERT INTO Usuario (nombre, correo, usuario, contrasena, fecha_registro, telefono)
+VALUES ('Usuario5', 'usuario5@example.com', 'usuario5user', 'hashed_password5', '2023-09-14', '567-890-1234');
+
+SELECT * FROM Usuario;
+
+
+CREATE TABLE Perro (
+    id_perro serial PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    edad INT,
+    raza VARCHAR(50),
+    nivel_comportamiento INT,
+    propietario_id INT REFERENCES Usuario(id_usuario)
+);
+
+-- Perro 1 (Asociado al Usuario 1)
+INSERT INTO Perro (nombre, edad, raza, nivel_comportamiento, propietario_id)
+VALUES ('Perro1', 3, 'Golden Retriever', 4, 1);
+
+-- Perro 2 (Asociado al Usuario 2)
+INSERT INTO Perro (nombre, edad, raza, nivel_comportamiento, propietario_id)
+VALUES ('Perro2', 2, 'Labrador Retriever', 3, 2);
+
+-- Perro 3 (Asociado al Usuario 3)
+INSERT INTO Perro (nombre, edad, raza, nivel_comportamiento, propietario_id)
+VALUES ('Perro3', 4, 'German Shepherd', 5, 3);
+
+-- Perro 4 (Asociado al Usuario 4)
+INSERT INTO Perro (nombre, edad, raza, nivel_comportamiento, propietario_id)
+VALUES ('Perro4', 1, 'Poodle', 2, 4);
+
+-- Perro 5 (Asociado al Usuario 5)
+INSERT INTO Perro (nombre, edad, raza, nivel_comportamiento, propietario_id)
+VALUES ('Perro5', 5, 'Bulldog', 4, 5);
+
+SELECT * FROM Perro;
+
+CREATE TABLE Notificacion (
+    id serial PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL,
+    descripcion TEXT,
+    usuario_id INT REFERENCES Usuario(id_usuario),
+    fecha_envio TIMESTAMP
+);
+
+
+-- Notificación 1 (Asociada al Usuario 1)
+INSERT INTO Notificacion (tipo, descripcion, usuario_id, fecha_envio)
+VALUES ('Recordatorio', '¡No olvides la sesión de entrenamiento hoy!', 1, NOW());
+
+-- Notificación 2 (Asociada al Usuario 2)
+INSERT INTO Notificacion (tipo, descripcion, usuario_id, fecha_envio)
+VALUES ('Logro', '¡Felicidades por los avances en el entrenamiento de tu perro!', 2, NOW());
+
+-- Notificación 3 (Asociada al Usuario 3)
+INSERT INTO Notificacion (tipo, descripcion, usuario_id, fecha_envio)
+VALUES ('Recordatorio', 'Mañana es el día de entrenamiento de tu perro.', 3, NOW());
+
+-- Notificación 4 (Asociada al Usuario 4)
+INSERT INTO Notificacion (tipo, descripcion, usuario_id, fecha_envio)
+VALUES ('Logro', 'Tu perro ha alcanzado un nuevo logro en su entrenamiento.', 4, NOW());
+
+-- Notificación 5 (Asociada al Usuario 5)
+INSERT INTO Notificacion (tipo, descripcion, usuario_id, fecha_envio)
+VALUES ('Recordatorio', 'Recuerda la cita de entrenamiento para tu perro esta tarde.', 5, NOW());
+
+
+SELECT * FROM Notificacion;
+
+CREATE TABLE PlanDeEntrenamiento (
+    id serial PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    tipo VARCHAR(50),
+    entrenador_id INT REFERENCES Entrenador(id),
+    video_entrenamiento BYTEA,
+    imagen_entrenamiento BYTEA
+);
+
+-- Plan de Entrenamiento 1
+INSERT INTO PlanDeEntrenamiento (nombre, descripcion, tipo, entrenador_id, video_entrenamiento, imagen_entrenamiento)
+VALUES ('Plan 1', 'Entrenamiento para cachorros', 'Obediencia Básica', 1, NULL, E'\\x89504E470D0A1A0A0000000D49484452000000640000006408060000009A76D9A300000300002C6C6F674F1C1E1E1E58FD0000000430745940A2D1A0000000750494D4507DB0B0A1014193FEC0000000463444546000082827D8700663D000000086B494344')
+;
+-- Plan de Entrenamiento 2
+INSERT INTO PlanDeEntrenamiento (nombre, descripcion, tipo, entrenador_id, video_entrenamiento, imagen_entrenamiento)
+VALUES ('Plan 2', 'Entrenamiento avanzado', 'Agilidad', 2, E'\\x52494646AE350300415649204C49535404030100000900000061636D6404050600010029016A0677008000000045786974006404', NULL)
+;
+
+-- Plan de Entrenamiento 3
+INSERT INTO PlanDeEntrenamiento (nombre, descripcion, tipo, entrenador_id, video_entrenamiento, imagen_entrenamiento)
+VALUES ('Plan 3', 'Entrenamiento de obediencia', 'Obediencia Avanzada', 1, NULL, E'\\x89504E470D0A1A0A0000000D49484452000000720000007208060000007A3C973F000000002C6C6F674F1C1E1E1E58FD0000000430745940A2D1A0000000750494D4507DB0B0A1014193FEC0000000463444546000082827D8700663D000000086B494344')
+;
+
+-- Plan de Entrenamiento 4
+INSERT INTO PlanDeEntrenamiento (nombre, descripcion, tipo, entrenador_id, video_entrenamiento, imagen_entrenamiento)
+VALUES ('Plan 4', 'Entrenamiento de agilidad extrema', 'Agilidad', 2, E'\\x52494646AE350300415649204C49535404030100000900000061636D6404050600010029016A0677008000000045786974006404', NULL)
+;
+
+-- Plan de Entrenamiento 5
+INSERT INTO PlanDeEntrenamiento (nombre, descripcion, tipo, entrenador_id, video_entrenamiento, imagen_entrenamiento)
+VALUES ('Plan 5', 'Entrenamiento para perros de rescate', 'Rescate', 3, E'\\x52494646AE350300415649204C49535404030100000900000061636D6404050600010029016A0677008000000045786974006404', NULL)
+;
+
+
+SELECT * FROM PlanDeEntrenamiento;
+
+
+CREATE TABLE TareasDeEntrenamiento (
+    id serial PRIMARY KEY,
+    estado VARCHAR(20),
+    descripcion TEXT,
+    proceso_perro_id INT REFERENCES Perro(id_perro),
+    historial_entrenamiento TEXT
+);
+
+-- Tarea de Entrenamiento 1
+INSERT INTO TareasDeEntrenamiento (estado, descripcion, proceso_perro_id, historial_entrenamiento)
+VALUES ('Pendiente', 'Entrenamiento de obediencia básica', 1, 'Comenzando con comandos de sentado y quedando.');
+
+-- Tarea de Entrenamiento 2
+INSERT INTO TareasDeEntrenamiento (estado, descripcion, proceso_perro_id, historial_entrenamiento)
+VALUES ('Completada', 'Entrenamiento de agilidad', 2, 'El perro ha superado con éxito todos los obstáculos en el circuito de agilidad.');
+
+-- Tarea de Entrenamiento 3
+INSERT INTO TareasDeEntrenamiento (estado, descripcion, proceso_perro_id, historial_entrenamiento)
+VALUES ('Pendiente', 'Entrenamiento de búsqueda y rescate', 3, 'Comenzando con la búsqueda de objetos en el campo de entrenamiento.');
+
+-- Tarea de Entrenamiento 4
+INSERT INTO TareasDeEntrenamiento (estado, descripcion, proceso_perro_id, historial_entrenamiento)
+VALUES ('En Progreso', 'Entrenamiento de obediencia avanzada', 4, 'Trabajando en comandos de obediencia más avanzados.');
+
+-- Tarea de Entrenamiento 5
+INSERT INTO TareasDeEntrenamiento (estado, descripcion, proceso_perro_id, historial_entrenamiento)
+VALUES ('Pendiente', 'Entrenamiento de socialización', 5, 'Planificando visitas a parques y encuentros con otros perros.');
+
+
+SELECT * FROM TareasDeEntrenamiento;
